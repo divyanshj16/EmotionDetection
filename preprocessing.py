@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 def get_subset(df,start=None,end=None,indices=None):  # no more use!
 	# print(start is not None,end is not None,indices is not None)
