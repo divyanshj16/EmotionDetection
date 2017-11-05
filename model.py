@@ -186,7 +186,7 @@ def model7(X,y,seed,is_training):
 	# Convolutional Layer #1
 	conv1 = tf.layers.conv2d(
 		inputs=input_layer,
-		filters=8,                 # change number of filters!!
+		filters=32,                 # change number of filters!!
 		kernel_size=[3, 3],
 		strides=(1,1),
 		padding="same",
@@ -202,7 +202,7 @@ def model7(X,y,seed,is_training):
 	# Convolutional Layer #2 and Pooling Layer #2
 	conv2 = tf.layers.conv2d(
 		inputs=pool1,
-		filters=10,               # change number of filters!!
+		filters=32,               # change number of filters!!
 		kernel_size=[3, 3],
 		padding="same",
 		activation=tf.nn.relu,
@@ -211,11 +211,58 @@ def model7(X,y,seed,is_training):
 		strides=(1,1))
 
 	batch_norm2 = tf.layers.batch_normalization(conv2,training=is_training)
+    
+	conv3 = tf.layers.conv2d(
+		inputs=batch_norm2,
+		filters=32,               # change number of filters!!
+		kernel_size=[3, 3],
+		padding="same",
+		activation=tf.nn.relu,
+		kernel_initializer=initializer,
+		use_bias=True,
+		strides=(1,1))
 
-	pool2 = tf.layers.max_pooling2d(inputs=batch_norm2, pool_size=[2, 2], strides=2)
+	batch_norm3 = tf.layers.batch_normalization(conv3,training=is_training)
+    
+	conv4 = tf.layers.conv2d(
+		inputs=batch_norm3,
+		filters=32,               # change number of filters!!
+		kernel_size=[3, 3],
+		padding="same",
+		activation=tf.nn.relu,
+		kernel_initializer=initializer,
+		use_bias=True,
+		strides=(1,1))
+
+	batch_norm4 = tf.layers.batch_normalization(conv4,training=is_training)
+    
+	conv5 = tf.layers.conv2d(
+		inputs=batch_norm4,
+		filters=32,               # change number of filters!!
+		kernel_size=[3, 3],
+		padding="same",
+		activation=tf.nn.relu,
+		kernel_initializer=initializer,
+		use_bias=True,
+		strides=(1,1))
+
+	batch_norm5 = tf.layers.batch_normalization(conv5,training=is_training)
+   
+	conv6 = tf.layers.conv2d(
+		inputs=batch_norm5,
+		filters=32,               # change number of filters!!
+		kernel_size=[3, 3],
+		padding="same",
+		activation=tf.nn.relu,
+		kernel_initializer=initializer,
+		use_bias=True,
+		strides=(1,1))
+
+	batch_norm6 = tf.layers.batch_normalization(conv6,training=is_training)
+	pool2 = tf.layers.max_pooling2d(inputs=batch_norm6, pool_size=[2, 2], strides=2)
 
 	# Dense Layer
-	pool2_flat = tf.reshape(pool2, [-1, 12 * 12 * 10])    # put 12 X 12 X {the value of number of filters of last layer}
+	pool2_flat = tf.reshape(pool2, [-1, 12 * 12 * 32])    # put 12 X 12 X {the value of number of filters of last layer}
 	dense = tf.layers.dense(inputs=pool2_flat, units=1024, activation=tf.nn.relu,use_bias=True,kernel_initializer=initializer)
 	batch_norm3 = tf.layers.batch_normalization(dense,training=is_training)
 	dropout = tf.layers.dropout(inputs=batch_norm3, rate=0.4, training=is_training)
