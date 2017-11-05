@@ -202,7 +202,7 @@ def model7(X,y,seed,is_training):
 	# Convolutional Layer #2 and Pooling Layer #2
 	conv2 = tf.layers.conv2d(
 		inputs=pool1,
-		filters=32,               # change number of filters!!
+		filters=64,               # change number of filters!!
 		kernel_size=[3, 3],
 		padding="same",
 		activation=tf.nn.relu,
@@ -214,7 +214,7 @@ def model7(X,y,seed,is_training):
     
 	conv3 = tf.layers.conv2d(
 		inputs=batch_norm2,
-		filters=32,               # change number of filters!!
+		filters=128,               # change number of filters!!
 		kernel_size=[3, 3],
 		padding="same",
 		activation=tf.nn.relu,
@@ -226,7 +226,7 @@ def model7(X,y,seed,is_training):
     
 	conv4 = tf.layers.conv2d(
 		inputs=batch_norm3,
-		filters=32,               # change number of filters!!
+		filters=128,               # change number of filters!!
 		kernel_size=[3, 3],
 		padding="same",
 		activation=tf.nn.relu,
@@ -238,7 +238,7 @@ def model7(X,y,seed,is_training):
     
 	conv5 = tf.layers.conv2d(
 		inputs=batch_norm4,
-		filters=32,               # change number of filters!!
+		filters=128,               # change number of filters!!
 		kernel_size=[3, 3],
 		padding="same",
 		activation=tf.nn.relu,
@@ -250,7 +250,7 @@ def model7(X,y,seed,is_training):
    
 	conv6 = tf.layers.conv2d(
 		inputs=batch_norm5,
-		filters=32,               # change number of filters!!
+		filters=256,               # change number of filters!!
 		kernel_size=[3, 3],
 		padding="same",
 		activation=tf.nn.relu,
@@ -262,7 +262,7 @@ def model7(X,y,seed,is_training):
 	pool2 = tf.layers.max_pooling2d(inputs=batch_norm6, pool_size=[2, 2], strides=2)
 
 	# Dense Layer
-	pool2_flat = tf.reshape(pool2, [-1, 12 * 12 * 32])    # put 12 X 12 X {the value of number of filters of last layer}
+	pool2_flat = tf.reshape(pool2, [-1, 12 * 12 * 256])    # put 12 X 12 X {the value of number of filters of last layer}
 	dense = tf.layers.dense(inputs=pool2_flat, units=1024, activation=tf.nn.relu,use_bias=True,kernel_initializer=initializer)
 	batch_norm3 = tf.layers.batch_normalization(dense,training=is_training)
 	dropout = tf.layers.dropout(inputs=batch_norm3, rate=0.4, training=is_training)
@@ -270,7 +270,6 @@ def model7(X,y,seed,is_training):
 	  # Logits Layer
 	logits = tf.layers.dense(inputs=dropout, units=7,use_bias=True,kernel_initializer=initializer)
 	return logits
-
 
 
 
