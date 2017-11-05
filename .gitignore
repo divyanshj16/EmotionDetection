@@ -3,3 +3,7 @@ data/
  __pycache__/*
  *.pyc
  *.cpython-36.pyc
+deep-belief-network/*
+.floydexpt
+.floydignore
+*.jpeg
