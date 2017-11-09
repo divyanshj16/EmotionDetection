@@ -1,5 +1,9 @@
 .ipynb_checkpoints/*
-data/
+data/*.csv
+data/*.floyddata
+data/.ipynb_checkpoints/
+*.zip
+*.tar.gz
  __pycache__/*
  *.pyc
  *.cpython-36.pyc
