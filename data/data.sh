@@ -4,3 +4,4 @@ tar -xf fer2013.tar
 mv fer2013/fer2013.csv ./train.csv
 rm fer2013.tar
 rm -rf fer2013
+python setup_data.py
